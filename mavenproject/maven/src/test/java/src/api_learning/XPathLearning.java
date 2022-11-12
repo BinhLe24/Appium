@@ -6,6 +6,8 @@ import io.appium.java_client.MobileElement;
 import src.driver.DriverFactory;
 import src.driver.Platform;
 
+import java.util.List;
+
 public class XPathLearning {
     public static void main(String[] args) {
         AppiumDriver<MobileElement> appiumDriver = DriverFactory.getDriver(Platform.ANDROID);
@@ -14,10 +16,18 @@ public class XPathLearning {
             //Navigate to login screen
             MobileElement navLoginBtnElem = appiumDriver.findElement(MobileBy.AccessibilityId("Login"));
             navLoginBtnElem.click();
+
             //Find all matching elements| Sharing about the trick with findElements
+            List<MobileElement> credFieldsElem = appiumDriver.findElements(MobileBy.xpath("//android.widget.EditText"));
+            final int USERNAME_INDEX = 0;
+            final int PASSWORD_INDEX = 1;
+            credFieldsElem.get(USERNAME_INDEX).sendKeys("binh@sth.com");
+            credFieldsElem.get(PASSWORD_INDEX).sendKeys("12345678");
 
             //Find login info text by UISelector
-
+            MobileElement loginInstructionElem =
+                    appiumDriver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().textContains(\"When the device\")"));
+            System.out.println(loginInstructionElem.getText());
             //Debug purpose ONLY
             Thread.sleep(3000);
 
