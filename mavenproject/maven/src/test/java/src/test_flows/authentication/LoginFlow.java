@@ -3,6 +3,7 @@ package src.test_flows.authentication;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.testng.Assert;
 import src.models.components.login.LoginFormComponent;
 import src.models.components.login.LoginFormComponentMod03;
 import src.models.pages.LoginScreenMod03;
@@ -63,6 +64,14 @@ public class LoginFlow extends BaseFlow {
 
         System.out.println("actualInvalidEmailTxt" + actualInvalidEmailTxt);
         System.out.println("expectedInvalidEmailTxt" + expectedInvalidEmailTxt);
+//        if (!actualInvalidEmailTxt.equalsIgnoreCase(expectedInvalidEmailTxt)){
+//            throw new RuntimeException("ERR, actual invalid email text is not correct");
+//        }
+//        Verifier.equals(actualInvalidEmailTxt, expectedInvalidEmailTxt);
+//        Verifier.equals(1,2)
+//        Assert.assertTrue(actualInvalidEmailTxt.equalsIgnoreCase(expectedInvalidEmailTxt),"[ERR] message");
+        Assert.assertEquals(actualInvalidEmailTxt, expectedInvalidEmailTxt,"[ERR] message");
+
     }
     private void verifyIncorrectPasswordLogin(LoginFormComponentMod03 loginFormComp) {
         String actualInvalidPasswordTxt = loginFormComp.invalidPasswordTxt();

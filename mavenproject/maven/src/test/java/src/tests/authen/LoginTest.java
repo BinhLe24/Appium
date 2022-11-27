@@ -16,14 +16,8 @@ public class LoginTest {
     @Test
     public void testLogin() {
         AppiumDriver<MobileElement> appiumDriver = DriverFactory.getDriver(Platform.ANDROID);
-        List<LoginCred> loginCredData = new ArrayList<>();
-        loginCredData.add(new LoginCred("", ""));
-        loginCredData.add(new LoginCred("binh@sth.com", "1234567"));
-        loginCredData.add(new LoginCred("bin@", "12345678"));
-        loginCredData.add(new LoginCred("binh@sth.com", "12345678"));
-
         try {
-            for (LoginCred loginCred : loginCredData) {
+            for (LoginCred loginCred : loginCredDataSet()) {
                 String username = loginCred.getUsername();
                 String password = loginCred.getPassword();
                 LoginFlow loginFlow = new LoginFlow(appiumDriver, username, password);
@@ -36,5 +30,14 @@ public class LoginTest {
             e.printStackTrace();
         }
         appiumDriver.quit();
+    }
+
+    private List<LoginCred> loginCredDataSet(){
+        List<LoginCred> loginCredData = new ArrayList<>();
+        loginCredData.add(new LoginCred("", ""));
+        loginCredData.add(new LoginCred("binh@sth.com", "1234567"));
+        loginCredData.add(new LoginCred("bin@", "12345678"));
+        loginCredData.add(new LoginCred("binh@sth.com", "12345678"));
+        return loginCredDataSet();
     }
 }
